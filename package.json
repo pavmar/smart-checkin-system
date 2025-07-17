@@ -1,0 +1,46 @@
+{
+  "name": "smart-checkin-system",
+  "version": "1.0.0",
+  "main": "expo/AppEntry.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web",
+    "backend": "cd backend && npm start",
+    "dev": "concurrently \"npm run backend\" \"npm start\"",
+    "test": "node test-system.js"
+  },
+  "dependencies": {
+    "@react-navigation/native": "^6.1.9",
+    "@react-navigation/stack": "^6.3.20",
+    "axios": "^1.6.2",
+    "expo": "~52.0.0",
+    "expo-camera": "~16.0.18",
+    "react": "18.3.1",
+    "react-native": "0.76.9",
+    "react-native-gesture-handler": "~2.20.2",
+    "react-native-paper": "^5.12.3",
+    "react-native-qrcode-svg": "^6.2.0",
+    "react-native-reanimated": "~3.16.1",
+    "react-native-safe-area-context": "4.12.0",
+    "react-native-screens": "~4.4.0",
+    "react-native-svg": "15.8.0",
+    "react-native-vector-icons": "^10.0.3",
+    "expo-status-bar": "~2.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "concurrently": "^8.2.2"
+  },
+  "expo": {
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "exclude": [
+          "react-native-vector-icons"
+        ],
+        "listUnknownPackages": false
+      }
+    }
+  }
+}
