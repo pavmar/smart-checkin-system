@@ -1,7 +1,13 @@
 import axios from 'axios';
 
 // Base URL for the backend API
-const BASE_URL = 'http://localhost:3001/api';
+// Using environment variables for flexible configuration
+const API_HOST = process.env.EXPO_PUBLIC_API_HOST || 'localhost';
+const API_PORT = process.env.EXPO_PUBLIC_API_PORT || '3001';
+const API_PROTOCOL = process.env.EXPO_PUBLIC_API_PROTOCOL || 'http';
+const BASE_URL = process.env.EXPO_PUBLIC_API_BASE_URL || `${API_PROTOCOL}://${API_HOST}:${API_PORT}/api`;
+
+console.log(`🔗 API Base URL: ${BASE_URL}`);
 
 // Create axios instance with default configuration
 const api = axios.create({
@@ -30,7 +36,15 @@ api.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.error('Response error:', error.response?.data || error.message);
+    if (error.code === 'NETWORK_ERROR' || error.message === 'Network Error') {
+      console.error('Network Error: Cannot connect to server at', BASE_URL);
+      console.error('Please ensure:');
+      console.error('1. Backend server is running on port 3001');
+      console.error('2. You are connected to the same network');
+      console.error('3. Firewall is not blocking the connection');
+    } else {
+      console.error('Response error:', error.response?.data || error.message);
+    }
     return Promise.reject(error);
   }
 );

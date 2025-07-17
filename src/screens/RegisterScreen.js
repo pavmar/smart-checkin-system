@@ -51,7 +51,6 @@ const RegisterScreen = ({ navigation }) => {
       const userData = {
         ...formData,
         uniqueId,
-        createdAt: new Date().toISOString(),
       };
       
       const response = await registerUser(userData);
